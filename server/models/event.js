@@ -1,6 +1,10 @@
 var mongoose = require('mongoose');
-var FriendSchema = new mongoose.Schema({
-	name: String,
-	age: Number
+var EventSchema = new mongoose.Schema({
+	_Userid: String,
+	location: {},
+	latitude: Number,
+	longitude: Number,
+	users:[],
+	description: String
 })
-mongoose.model('Friend', FriendSchema)
+mongoose.model('Event', EventSchema)

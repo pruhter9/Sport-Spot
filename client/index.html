@@ -1,18 +1,29 @@
 <html ng-app="SportSpot_app">
 <head>
-  <title>Full Mean Demo</title>
+  <title>Create. Gather. Play.</title>
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular-route.js"></script>
+  <script type="sty"></script>
   <script>
-  var SportSpot_app = angular.module('friends_app', []);
+  var SportSpot_app = angular.module('SportSpot_app', ["ngRoute"]);
 
-  friends_app.controller('FriendsController', function($scope, FriendFactory) {
-    $scope.friends = FriendFactory.getFriends(function(res) {
-      $scope.friends = res;
-    })
+  SportSpot_app.config(function($routeProvider){
+    $routeProvider
+      .when('/', {
+        templateUrl: 'index.html'
+      })
+      .otherwise({
+        redirectTo: '/'
+      });
+  })
 
-    $scope.addFriend = function() {
-      FriendFactory.addFriend($scope.new_friend, function(friends) {
-        $scope.friends = friends;
+  SportSpot_app.controller('Users', function($scope, UsersFactory) {
+    var that = this
+
+    that.register = function() {
+      console.log("hello")
+      UsersFactory.register(that.newUser, function(newRegUser) {
+        $scope.currUser = newRegUser;
       });
       $scope.new_friend = {};
     }
@@ -20,39 +31,70 @@
 
 
 
-  friends_app.factory('FriendFactory', function($http) {
+  SportSpot_app.factory('UsersFactory', function($http) {
     var factory = {};
-    var friends = [];
-    factory.getFriends = function(callback) {
-      $http.get('/friends').success(function(res) {
-        friends = res;
-        callback(friends);
+    var Users = [];
+    var currUser={}
+    factory.register = function(newUser, callback) {
+      console.log(newUser)
+      $http.post('/Users', newUser).success(function(response) {
+        currUser = response;
+        callback(currUser);
       })
     }
 
-    factory.addFriend = function(new_friend, callback) {
-      $http.post('/friends', new_friend).success(function(res) {
-        friends.push({name: new_friend.name, age: new_friend.age});
-        friends = res;
-        callback(friends);
-      })
-    }
-    return factory;
+  //   factory.addUser = function(new_friend, callback) {
+  //     $http.post('/Users', new_friend).success(function(res) {
+  //       Users.push({name: new_friend.name, age: new_friend.age});
+  //       Users = res;
+  //       callback(Users);
+  //     })
+  //   }
+   return factory;
   })
   </script>
+  <style type="text/css">
+    .has-error{
+      background-color:red;
+    }
+  </style>
 </head>
-<body ng-controller="FriendsController">
-  <h1>Friends</h1>
-  <input type="text" ng-model="filter_name" placeholder="filter">
-  {{filter_name}}
-  <ul>
-    <li ng-repeat="friend in friends | filter: filter_name">
-      {{friend.name}}, {{friend.age}}
-    </li>
-  </ul>
-  <h1>Add a Friend</h1>
-  <input type="text" ng-model="new_friend.name" placeholder="name">
-  <input type="text" ng-model="new_friend.age" placeholder="age">
-  <input type="submit" ng-click="addFriend()">
+<body>
+  <div ng-controller="Users as UC">
+
+    <form name="regForm" novalidate >
+
+      <input type = "text" name="fName" placeholder="First Name" 
+      ng-class="{'has-error' : regForm.fName.$invalid && !regForm.fName.$pristine }" 
+      ng-model="UC.newUser.fName" ng-minlength="2" ng-maxlength="20" required>
+
+      <input type = "text" name ="lName" placeholder ="Last Name" 
+      ng-class = "{'has-error' : regForm.lName.$invalid && !regForm.lName.$pristine }" 
+      ng-model ="UC.newUser.lName" ng-minlength="2" ng-maxlength="20" required>
+
+      <input type = "text" name ="uName" placeholder ="User Name"  
+      ng-class = "{'has-error' : regForm.uName.$invalid && !regForm.uName.$pristine }" 
+      ng-model ="UC.newUser.uName" ng-minlength="2" ng-maxlength="20" required>
+
+      <input type = "password" name ="password" placeholder ="Password"
+      ng-class = "{'has-error' : regForm.password.$invalid && !regForm.password.$pristine }" ng-model ="UC.newUser.password" ng-minlength="8" ng-maxlength="20" required>
+
+      <input type = "password" name ="cPassword" placeholder = "confirm password" 
+      ng-class = "{'has-error' : regForm.cPassword.$invalid && !regForm.cPassword.$pristine }" 
+      ng-minlength="2" ng-maxlength="20" required>
+
+      <input type = "email" name ="email" placeholder ="email"
+      ng-class = "{'has-error' : regForm.email.$invalid && !regForm.email.$pristine }" 
+      ng-model ="UC.new_user.userName"  ng-minlength="2" ng-maxlength="20" required> 
+
+      <a ng-click ='UC.register()' href= "" ng-disabled="$regForm.$invalid">Register</a>
+
+    </form>
+<!--     <div ng-show="form.$submitted || form.uName.$touched">
+      <div ng-show="form.uName.$error.required">Tell us your name.</div>
+    </div> -->
+
+
+  </div>
 </body>
 </html>
