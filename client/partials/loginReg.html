@@ -1,0 +1,31 @@
+<form name="regForm" novalidate >
+
+  <input type = "text" name="fName" placeholder="First Name"
+  ng-class="{'has-error' : regForm.fName.$invalid && !regForm.fName.$pristine }"
+  ng-model="UC.newUser.fName" ng-minlength="2" ng-maxlength="20" required>
+
+  <input type = "text" name ="lName" placeholder ="Last Name"
+  ng-class = "{'has-error' : regForm.lName.$invalid && !regForm.lName.$pristine }"
+  ng-model ="UC.newUser.lName" ng-minlength="2" ng-maxlength="20" required>
+
+  <input type = "text" name ="uName" placeholder ="User Name"
+  ng-class = "{'has-error' : regForm.uName.$invalid && !regForm.uName.$pristine }"
+  ng-model ="UC.newUser.uName" ng-minlength="2" ng-maxlength="20" required>
+
+  <input type = "password" name ="password" placeholder ="Password"
+  ng-class = "{'has-error' : regForm.password.$invalid && !regForm.password.$pristine }" ng-model ="UC.newUser.password" ng-minlength="8" ng-maxlength="20" required>
+
+  <input type = "password" name ="cPassword" placeholder = "confirm password"
+  ng-class = "{'has-error' : regForm.cPassword.$invalid && !regForm.cPassword.$pristine }"
+  ng-minlength="2" ng-maxlength="20" required>
+
+  <input type = "email" name ="email" placeholder ="email"
+  ng-class = "{'has-error' : regForm.email.$invalid && !regForm.email.$pristine }"
+  ng-model ="UC.new_user.userName"  ng-minlength="2" ng-maxlength="20" required>
+
+  <a ng-click ='UC.register()' href= "" ng-disabled="$regForm.$invalid">Register</a>
+
+</form>
+<!--     <div ng-show="form.$submitted || form.uName.$touched">
+  <div ng-show="form.uName.$error.required">Tell us your name.</div>
+</div> -->

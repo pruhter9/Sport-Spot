@@ -1,31 +1,50 @@
 <html ng-app="SportSpot_app">
 <head>
   <title>Create. Gather. Play.</title>
-  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
-  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular-route.js"></script>
+  <!-- Style -->
+  <link rel="stylesheet" type="text/css" href="./styles/css/bootstrap.min.css">
+  <!-- javascript -->
+  <script type="text/javascript" src="./styles/js/angular.min.js"></script>
+  <script type="text/javascript" src="./styles/js/angular.min.js"></script>
+  <script type="text/javascript" src="./styles/js/angular-route.min.js"></script>
+  <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyC0h-mb8MjCMT4ndk2G4M21XeuScOAsYA8&signed_in=true&callback=initMap" async defer></script>
+<script>
+function initialize() {
+  var mapProp = {
+    center:new google.maps.LatLng(51.508742,-0.120850),
+    zoom:5,
+    mapTypeId:google.maps.MapTypeId.ROADMAP
+  };
+  var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+}
+google.maps.event.addDomListener(window, 'load', initialize);
+</script>
   <script type="sty"></script>
   <script>
   var SportSpot_app = angular.module('SportSpot_app', ["ngRoute"]);
 
-  SportSpot_app.config(function($routeProvider){
+  SportSpot_app.config(function ($routeProvider){
     $routeProvider
       .when('/', {
-        templateUrl: 'index.html'
+        templateUrl: 'partials/loginReg.html'
+      })
+      .when('/main', {
+        templateUrl: 'partials/main.html'
       })
       .otherwise({
         redirectTo: '/'
       });
   })
 
-  SportSpot_app.controller('Users', function($scope, UsersFactory) {
+  SportSpot_app.controller('Users', function($scope, UsersFactory, $location) {
     var that = this
 
     that.register = function() {
-      console.log("hello")
       UsersFactory.register(that.newUser, function(newRegUser) {
-        $scope.currUser = newRegUser;
+        that.currUser = newRegUser;
+        $location.path('/main')
       });
-      $scope.new_friend = {};
+      that.newUser = {};
     }
   })
 
@@ -57,44 +76,16 @@
     .has-error{
       background-color:red;
     }
+    #map {
+      height: 100%;
+    }
   </style>
 </head>
 <body>
   <div ng-controller="Users as UC">
-
-    <form name="regForm" novalidate >
-
-      <input type = "text" name="fName" placeholder="First Name" 
-      ng-class="{'has-error' : regForm.fName.$invalid && !regForm.fName.$pristine }" 
-      ng-model="UC.newUser.fName" ng-minlength="2" ng-maxlength="20" required>
-
-      <input type = "text" name ="lName" placeholder ="Last Name" 
-      ng-class = "{'has-error' : regForm.lName.$invalid && !regForm.lName.$pristine }" 
-      ng-model ="UC.newUser.lName" ng-minlength="2" ng-maxlength="20" required>
-
-      <input type = "text" name ="uName" placeholder ="User Name"  
-      ng-class = "{'has-error' : regForm.uName.$invalid && !regForm.uName.$pristine }" 
-      ng-model ="UC.newUser.uName" ng-minlength="2" ng-maxlength="20" required>
-
-      <input type = "password" name ="password" placeholder ="Password"
-      ng-class = "{'has-error' : regForm.password.$invalid && !regForm.password.$pristine }" ng-model ="UC.newUser.password" ng-minlength="8" ng-maxlength="20" required>
-
-      <input type = "password" name ="cPassword" placeholder = "confirm password" 
-      ng-class = "{'has-error' : regForm.cPassword.$invalid && !regForm.cPassword.$pristine }" 
-      ng-minlength="2" ng-maxlength="20" required>
-
-      <input type = "email" name ="email" placeholder ="email"
-      ng-class = "{'has-error' : regForm.email.$invalid && !regForm.email.$pristine }" 
-      ng-model ="UC.new_user.userName"  ng-minlength="2" ng-maxlength="20" required> 
-
-      <a ng-click ='UC.register()' href= "" ng-disabled="$regForm.$invalid">Register</a>
-
-    </form>
-<!--     <div ng-show="form.$submitted || form.uName.$touched">
-      <div ng-show="form.uName.$error.required">Tell us your name.</div>
-    </div> -->
-
-
+    <div class="container">
+      <div ng-view=""></div>
+    </div>
   </div>
 </body>
 </html>
