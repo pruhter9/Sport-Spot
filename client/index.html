@@ -1,42 +1,78 @@
-<html ng-app="SportSpot_app">
+<html>
 <head>
   <title>Create. Gather. Play.</title>
+  <script src='http://maps.googleapis.com/maps/api/js?sensor=false&language=en'></script>
+  <script src='http://code.jquery.com/jquery-2.1.4.min.js'></script>
   <!-- Style -->
   <link rel="stylesheet" type="text/css" href="./styles/css/bootstrap.min.css">
   <!-- javascript -->
-  <script type="text/javascript" src="./styles/js/angular.min.js"></script>
-  <script type="text/javascript" src="./styles/js/angular.min.js"></script>
-  <script type="text/javascript" src="./styles/js/angular-route.min.js"></script>
-  <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyC0h-mb8MjCMT4ndk2G4M21XeuScOAsYA8&signed_in=true&callback=initMap" async defer></script>
-<script>
-function initialize() {
-  var mapProp = {
-    center:new google.maps.LatLng(51.508742,-0.120850),
-    zoom:5,
-    mapTypeId:google.maps.MapTypeId.ROADMAP
-  };
-  var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
-}
-google.maps.event.addDomListener(window, 'load', initialize);
-</script>
-  <script type="sty"></script>
-  <script>
-  var SportSpot_app = angular.module('SportSpot_app', ["ngRoute"]);
 
-  SportSpot_app.config(function ($routeProvider){
-    $routeProvider
-      .when('/', {
-        templateUrl: 'partials/loginReg.html'
-      })
-      .when('/main', {
-        templateUrl: 'partials/main.html'
-      })
-      .otherwise({
-        redirectTo: '/'
+  <script type="text/javascript" src="./styles/js/angular.min.js"></script>
+  <script type="text/javascript" src="./styles/js/lodash.min.js"></script>
+  <script type="text/javascript" src="./styles/js/angular-route.min.js"></script>
+  <script type="text/javascript" src="./styles/js/app.js"></script>
+  <script>
+  
+  angular.module('SportSpot_app')
+  .controller('GoogleMaps', function($scope){
+
+    console.log(google)
+
+    var that = this;
+
+    that.mapOptions = {
+      zoom: 4,
+      center: new google.maps.LatLng(41.923, 12.513),
+      mapTypeId: google.maps.MapTypeId.TERRAIN
+    }
+      that.map = new google.maps.Map(document.getElementById('map'), that.mapOptions);
+
+    var cities = ["Atlanta, USA", "Seattle, USA", "13530 Meadow Road, Everett, WA, 98208"];
+    var geocoder= new google.maps.Geocoder();
+
+    that.markers = [];
+
+    var createMarker = function (info){
+      // for (var i = 0; i < Things.length; i++) {
+      //   Things[i]
+      // };
+      var marker = new google.maps.Marker({
+        map: that.map,
+        position: new google.maps.LatLng(info.lat(), info.lng())
       });
+    }
+
+    // var locations = [{"lat":41.923, "lng":12.513}, {"lat":41.6, "lng":12.2}, {"lat":41.323, "lng":12.013}]
+
+    // createMarker(locations)
+    // function geocodeLocation(){
+    //   geocoder.geocode( { 'address': cities[0] }, function(results, status) {
+    //       if (status == google.maps.GeocoderStatus.OK) {
+    //         newAddress = results[0].geometry.location;
+    //         that.map.setCenter(newAddress);
+    //         createMarker(newAddress)
+    //       } else {
+    //         console.log(status)
+    //       }
+    //   });
+    // }
+    for (var i = 0; i < cities.length; i++) {
+
+      geocoder.geocode( { 'address': cities[i] }, function(results, status) {
+          if (status == google.maps.GeocoderStatus.OK) {
+            newAddress = results[0].geometry.location;
+            that.map.setCenter(newAddress);
+            createMarker(newAddress)
+          } else {
+            console.log(status)
+          }
+      });
+          };
+
   })
 
-  SportSpot_app.controller('Users', function($scope, UsersFactory, $location) {
+  angular.module('SportSpot_app')
+  .controller('Users', function($scope, UsersFactory, $location) {
     var that = this
 
     that.register = function() {
@@ -49,8 +85,8 @@ google.maps.event.addDomListener(window, 'load', initialize);
   })
 
 
-
-  SportSpot_app.factory('UsersFactory', function($http) {
+  angular.module('SportSpot_app')
+  .factory('UsersFactory', function($http) {
     var factory = {};
     var Users = [];
     var currUser={}
@@ -61,30 +97,21 @@ google.maps.event.addDomListener(window, 'load', initialize);
         callback(currUser);
       })
     }
-
-  //   factory.addUser = function(new_friend, callback) {
-  //     $http.post('/Users', new_friend).success(function(res) {
-  //       Users.push({name: new_friend.name, age: new_friend.age});
-  //       Users = res;
-  //       callback(Users);
-  //     })
-  //   }
-   return factory;
+    return factory;
   })
   </script>
   <style type="text/css">
-    .has-error{
-      background-color:red;
-    }
-    #map {
-      height: 100%;
-    }
+#map {
+ height:420px;
+ width:600px;
+}
   </style>
 </head>
-<body>
+<body ng-app="SportSpot_app">
   <div ng-controller="Users as UC">
-    <div class="container">
-      <div ng-view=""></div>
+      <div class="container">
+        <div ng-view=""></div>
+      </div>
     </div>
   </div>
 </body>
