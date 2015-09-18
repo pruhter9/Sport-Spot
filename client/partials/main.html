@@ -1,9 +1,13 @@
-<div ng-controller="GoogleMaps">
-<div class="row">
+<div class="row filters" ng-init="GM.mainMap()">
+	<a href="#/event" ng-click="GM.clearMarkers()">Create an event</a>
 	<h2>Filters</h2>
-	<input class="form-control" placeholder="location">
-	<input class="form-control" placeholder="sport">
-	<input class="form-control" placeholder="other">
-</div>
-<div id = "map"></div>
+	<div class="form-group">
+		<input class="form-control" placeholder="location">
+	</div>
+	<div class="form-group">
+		<input class="form-control" placeholder="sport">
+	</div>
+	<div class="form-group">
+		<input class="form-control" placeholder="other">
+	</div>
 </div>
