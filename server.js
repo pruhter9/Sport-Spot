@@ -9,7 +9,7 @@ app.use(bodyParser.urlencoded());
 app.use(express.static(path.join(__dirname, './client')));
 require('./config/mongoose.js');
 require('./config/routes.js')(app);
-var server = app.listen(8000, function(){
+var server = app.listen(process.env.PORT || 8000, function(){
 	console.log('sportStuff on port 8000')
 })
 var io = require('socket.io').listen(server)
