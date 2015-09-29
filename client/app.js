@@ -3,7 +3,7 @@ var SportSpot_app = angular.module('SportSpot_app', ['ngRoute']);
   SportSpot_app.config(function ($routeProvider){
     $routeProvider
       .when('/', {
-        templateUrl: 'partials/loginreg.html'
+        templateUrl: 'partials/loginReg.html'
       })
       .when('/main', {
         templateUrl: 'partials/main.html'
