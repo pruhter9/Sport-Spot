@@ -1,0 +1,28 @@
+<div ng-init='EC.resize()'>
+	<header>Created By: {{EC.currEvent[0]._user.firstName}} {{EC.currEvent[0]._user.lastName}}</header>
+	<header>Address: {{EC.currEvent[0].address}}</header>
+	<header>Information: {{EC.currEvent[0].information}}</header>
+	<header>Activity: {{EC.currEvent[0].activity}}</header>
+	<header>Date: {{EC.currEvent[0].date | date:'medium'}}</header>
+	<header>Users Joined: <span ng-repeat="user in EC.currEvent[0].users">{{user.userName}} || <span></header>
+	<div class='row'>
+	<a href="" ng-click='EC.joinEvent()'>Join</a> <span>{{EC.errorMsg}}</span> || <a href="#/main" ng-click="EC.clearMsg()">back</a> || <button class='btn btn-default' ng-click ='EC.sendMessage()'> Send Message </button> {{EC.errorChat}} <input type='text' class="form-control" ng-model='EC.sentMessage.text'>
+	</div>
+</div><div ng-init='EC.mainMap()'></div>
+<style type="text/css">
+	div #chatRoom{
+		height: 250;
+		width: 49%;
+		display:inline-block;
+		border: 1px solid black;
+		vertical-align: top;
+		overflow:scroll;
+	}
+
+	div #map{
+		height: 250;
+		width: 50%;
+		display: inline-block;
+		vertical-align: top;
+	}
+</style>

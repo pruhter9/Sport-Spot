@@ -1,6 +1,10 @@
+
 #map {
 	height: 500px;
 	width: 100%
+}
+#chatRoom{
+	display: none;
 }
 
 #event {
@@ -10,4 +14,9 @@
 
 div.filters {
 	margin-bottom: 20px;
+}
+
+div .login {
+	display : inline-block;
+	vertical-align: top;
 }

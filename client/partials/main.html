@@ -1,13 +1,14 @@
-<div class="row filters" ng-init="GM.mainMap()">
-	<a href="#/event" ng-click="GM.clearMarkers()">Create an event</a>
+<div class="row filters" ng-init="EC.mainMap()">
+	<a href="#/event" ng-click="EC.clearMarkers()">Create an event</a>
 	<h2>Filters</h2>
 	<div class="form-group">
-		<input class="form-control" placeholder="location">
+		<input class="form-control" placeholder="address" ng-model="EC.filter.address" ng-change="EC.filterEvent('address')">
 	</div>
 	<div class="form-group">
-		<input class="form-control" placeholder="sport">
+		<input class="form-control" placeholder="acitivity" ng-model="EC.filter.activity" ng-change="EC.filterEvents('activity')">
 	</div>
 	<div class="form-group">
-		<input class="form-control" placeholder="other">
+		<input class="form-control" placeholder="other" ng-model="EC.filter.other" ng-change="EC.filterEvents('other')">
 	</div>
+	<a href="" ng-click="EC.clearMarkers()">clear markers</a> || <a href="" ng-click="UC.logOut()">Log Out</a> || <a href="" ng-click="EC.resetMarkers()">Reset Markers</a> 
 </div>

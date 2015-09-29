@@ -1,19 +1,27 @@
+<div>{{UC.currUser}}</div>
 <div class="row">
 	<form>
 		<div class="form-group">
-			<label>Location</label>
-			<input ng-model="eC.location" class="form-control" type="text" placeholder="location">
+			<label>Address</label>
+			<input ng-model="EC.newEvent.address" class="form-control" type="text" placeholder="address">
 		</div>
 		<div class="form-group">
 			<label>Activity</label>
-			<select multiple class="form-control" ng-model="eC.activity">
-				<option ng-selected="eC.activity == item.name" ng-value="item.name" ng-repeat="item in eC.activityArr">{{ item.name }}</option>
+			<select multiple class="form-control" ng-model="EC.newEvent.activity">
+				<option ng-selected="EC.activity == item.name" ng-value="item.name" ng-repeat="item in EC.activityArr">{{ item.name }}</option>
 			</select>
 		</div>
 		<div class="form-group">
 			<label>Description</label>
-			<textarea rows="3" ng-model="eC.desc" class="form-control"></textarea>
+			<textarea rows="3" ng-model="EC.newEvent.information" class="form-control"></textarea>
 		</div>
-		<button class="btn btn-default" ng-click="eC.createEvent()">Create</button>
+		<div class="form-group">
+			<label>Date</label>
+			<div class="input-group date" id='datetimepicker1'>
+				<input ng-model="EC.newEvent.date" class="form-control" type="datetime-local" placeholder="" required>
+			</div>
+		</div>
+		<button class="btn btn-default" ng-click="EC.createEvent()">Create</button>
 	</form>
 </div>
+<a href="#/main">back</a>

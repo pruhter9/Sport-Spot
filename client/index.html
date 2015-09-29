@@ -1,6 +1,7 @@
 <html ng-app="SportSpot_app">
   <head>
     <title>Create. Gather. Play.</title>
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
     <script src='http://maps.googleapis.com/maps/api/js?sensor=false&language=en'></script>
     <script src='http://code.jquery.com/jquery-2.1.4.min.js'></script>
     <!-- Style -->
@@ -11,23 +12,26 @@
     <script type="text/javascript" src="./styles/js/angular.min.js"></script>
     <script type="text/javascript" src="./styles/js/lodash.min.js"></script>
     <script type="text/javascript" src="./styles/js/angular-route.min.js"></script>
-  </head>
-  <body>
-    <div ng-controller="Users as UC">
-      <div ng-controller="GoogleMaps as GM">
-        <div ng-controller="Events as eC">
-          <div class="container">
-            <div ng-view=""></div>
-            <div id = "map"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </body>
-  <!-- initialize the app with angular -->
+      <!-- initialize the app with angular -->
   <script type="text/javascript" src="./app.js"></script>
   <script type="text/javascript" src="./javascripts/controllers/users.js"></script>
   <script type="text/javascript" src="./javascripts/controllers/GoogleMaps.js"></script>
   <script type="text/javascript" src="./javascripts/controllers/events.js"></script>
   <script type="text/javascript" src="./javascripts/factories/user.js"></script>
+  <script type="text/javascript" src="./javascripts/factories/event.js"></script>
+  <script type="text/javascript" src="./javascripts/factories/socket.js"></script>
+  </head>
+  <body>
+    <div ng-controller="Users as UC">
+        <div ng-controller="Events as EC">
+          <div class="container">
+            <div ng-view=""></div>
+            <div id='chatRoom'>
+              <p ng-repeat='msg in EC.currEvent[0].messages'>{{msg.text}} - {{msg.username}}({{msg.date | date: 'medium'}}) </p>
+            </div>
+            <div id = "map"></div>
+        </div> 
+      </div>
+    </div>
+  </body>
 </html>

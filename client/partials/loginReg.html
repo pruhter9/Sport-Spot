@@ -1,32 +1,55 @@
+<div>{{UC.loginError}}</div>
+
+<div class="login" ng-init='UC.checkLogin()'> <header> Login </header>
+
+<form name="logForm" novalidate >
+
+  <p><input type = "text" name ="uName" placeholder ="User Name"
+  ng-class = "{'has-error' : regForm.uName.$invalid && !regForm.uName.$pristine }"
+  ng-model ="UC.loginInfo.userName" ng-minlength="2" ng-maxlength="20" required></p>
+
+  <p><input type = "password" name ="password" placeholder ="Password"
+  ng-class = "{'has-error' : regForm.password.$invalid && !regForm.password.$pristine }" ng-model ="UC.loginInfo.password" ng-minlength="8" ng-maxlength="20" required></p>
+
+  <p><a ng-click ='UC.login()' href= "" ng-disabled="$regForm.$invalid">Login</a></p>
+
+</form> </div>
+
+<div class = "login"><header> Register </header>
+
 <form name="regForm" novalidate >
 
-  <input type = "text" name="fName" placeholder="First Name"
+  <p><input type = "text" name="fName" placeholder="First Name"
   ng-class="{'has-error' : regForm.fName.$invalid && !regForm.fName.$pristine }"
-  ng-model="UC.newUser.fName" ng-minlength="2" ng-maxlength="20" required>
+  ng-model="UC.newUser.firstName" ng-minlength="2" ng-maxlength="20" required></p>
 
-  <input type = "text" name ="lName" placeholder ="Last Name"
+  <p><input type = "text" name ="lName" placeholder ="Last Name"
   ng-class = "{'has-error' : regForm.lName.$invalid && !regForm.lName.$pristine }"
-  ng-model ="UC.newUser.lName" ng-minlength="2" ng-maxlength="20" required>
+  ng-model ="UC.newUser.lastName" ng-minlength="2" ng-maxlength="20" required></p>
 
-  <input type = "text" name ="uName" placeholder ="User Name"
+  <p><input type = "text" name ="userName" placeholder ="User Name"
   ng-class = "{'has-error' : regForm.uName.$invalid && !regForm.uName.$pristine }"
-  ng-model ="UC.newUser.uName" ng-minlength="2" ng-maxlength="20" required>
+  ng-model ="UC.newUser.userName" ng-minlength="2" ng-maxlength="20" required></p>
 
-  <input type = "password" name ="password" placeholder ="Password"
-  ng-class = "{'has-error' : regForm.password.$invalid && !regForm.password.$pristine }" ng-model ="UC.newUser.password" ng-minlength="8" ng-maxlength="20" required>
+  <p><input type = "password" name ="password" placeholder ="Password"
+  ng-class = "{'has-error' : regForm.password.$invalid && !regForm.password.$pristine }" ng-model ="UC.newUser.password" ng-minlength="8" ng-maxlength="20" required></p>
 
-  <input type = "password" name ="cPassword" placeholder = "confirm password"
+  <p><input type = "password" name ="cPassword" placeholder = "confirm password"
   ng-class = "{'has-error' : regForm.cPassword.$invalid && !regForm.cPassword.$pristine }"
-  ng-minlength="2" ng-maxlength="20" required>
+  ng-minlength="2" ng-maxlength="20" required></p>
 
-  <input type = "email" name ="email" placeholder ="email"
+  <p><input type = "email" name ="email" placeholder ="email"
   ng-class = "{'has-error' : regForm.email.$invalid && !regForm.email.$pristine }"
-  ng-model ="UC.new_user.userName"  ng-minlength="2" ng-maxlength="20" required>
+  ng-model ="UC.new_user.email"  ng-minlength="2" ng-maxlength="20" required></p>
 
-  <a ng-click ='UC.register()' href= "" ng-disabled="$regForm.$invalid">Register</a>
+  <p><a ng-click ='UC.register()' href= "" ng-disabled="$regForm.$invalid">Register</a></p>
 
-</form>
+</form></div>
+<style>
+#map{
+  display:none;
+}
+</style>
 <!--     <div ng-show="form.$submitted || form.uName.$touched">
   <div ng-show="form.uName.$error.required">Tell us your name.</div>
 </div> -->
-<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyC0h-mb8MjCMT4ndk2G4M21XeuScOAsYA8&signed_in=true&callback=initMap" async defer></script>
