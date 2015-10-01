@@ -40,7 +40,7 @@
 
   <p><input class="form-control" type = "email" name ="email" placeholder ="email"
   ng-class = "{'has-error' : regForm.email.$invalid && !regForm.email.$pristine }"
-  ng-model ="UC.new_user.email"  ng-minlength="2" ng-maxlength="20" required></p>
+  ng-model ="UC.newUser.email"  ng-minlength="2" ng-maxlength="20" required></p>
 
   <p><a ng-click ='UC.register()' href= "" ng-disabled="$regForm.$invalid">Register</a></p>
 

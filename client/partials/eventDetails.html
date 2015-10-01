@@ -36,13 +36,13 @@
 	<header>Date: {{EC.currEvent[0].date | date:'medium'}}</header>
 	<header>Users Joined: <span ng-repeat="user in EC.currEvent[0].users">{{user.userName}} || <span></header>
 	<div class='row'>
-	<a href="" ng-click='EC.joinEvent()'>Join</a> <span>{{EC.errorMsg}}</span> || <a href="#/main" ng-click="EC.clearMsg()">back</a> || <button class='btn btn-default' ng-click ='EC.sendMessage()'> Send Message </button> {{EC.errorChat}} <input type='text' class="form-control" ng-model='EC.sentMessage.text'>
+	<a href="" ng-click='EC.joinEvent()'>Join</a> <span>{{EC.errorMsg}}</span> || <a href="#/main" ng-click="EC.clearMsg()">back</a>
 	</div>
 </div><div ng-init='EC.mainMap()'></div>
 <style type="text/css">
 	div #chatRoom{
 		height: 250;
-		width: 49%;
+		width: 100%;
 		display:inline-block;
 		border: 1px solid black;
 		vertical-align: top;
@@ -51,8 +51,21 @@
 
 	div #map{
 		height: 250;
-		width: 50%;
+		width: 100%;
 		display: inline-block;
 		vertical-align: top;
 	}
+	  #inputBox{
+    width: 100%;
+    height:50px;
+    display: inline-block;
+  }
+  #inputChat{
+    width: 70%;
+    display: inline-block;
+  }
+  .sendMsg{
+    width: 30%;
+    display:inline-block;
+  }
 </style>

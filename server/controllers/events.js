@@ -35,14 +35,6 @@ module.exports = (function() {
 				} else {
 					console.log('here in get one results',result)
 					response.json(result)
-					// result.populate('Users').exec(function(err, finResult){
-					// 	if(err){
-					// 		console.log(err)
-					// 	}else{
-					// 		console.log('final result of join/populate', result)
-					// 		response.json(finResult)
-					// 	}
-					// })
 				}
 			})
 		},

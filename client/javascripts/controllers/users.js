@@ -4,6 +4,13 @@ SportSpot_app.controller('Users', function($scope, UsersFactory, $location) {
   that.loginError = ""
   that.loggedIn = false;
 
+  UsersFactory.checkLogin(function(data){
+    if(data){
+      that.currUser=data;
+      that.loggedIn=true;
+    };
+  });
+
   that.register = function() {
     UsersFactory.register(that.newUser, function(newRegUser) {
        if (newRegUser.length == 0) {
@@ -46,8 +53,10 @@ SportSpot_app.controller('Users', function($scope, UsersFactory, $location) {
     UsersFactory.logOut(function(data){
       if(data.logOut){
         that.loginError=data.msg
+        that.loggedIn = false
         $location.path('/')
       }else{
+        that.loggedIn = false
         that.loginError=data.msg
         $location.path('/')
       }

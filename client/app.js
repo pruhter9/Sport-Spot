@@ -14,6 +14,9 @@ var SportSpot_app = angular.module('SportSpot_app', ['ngRoute','ui.bootstrap']);
       .when('/eventDetails/:eventID', {
         templateUrl: 'partials/eventDetails.html'
       })
+      .when('/users/', {
+        templateUrl: 'partials/users.html'
+      })
       .otherwise({
         redirectTo: '/'
       });

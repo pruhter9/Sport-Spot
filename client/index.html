@@ -63,11 +63,11 @@
                 <li class="dropdown" ng-if="UC.loggedIn">
                   <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account <span class="caret"></span></a>
                   <ul class="dropdown-menu">
-                    <li><a href="#/profile">Profile</a></li>
+                    <li><a href="#/users">Profile</a></li>
                     <li><a href="" ng-click="UC.getUserEvents()">Events</a></li>
                     <li><a href="#">Something else here</a></li>
                     <li role="separator" class="divider"></li>
-                    <li><a href="#">Separated link</a></li>
+                    <li><a href="" ng-click="UC.logOut()">Log Out</a></li>
                   </ul>
                 </li>
                 <form ng-if="UC.loggedIn==false"class="navbar-form navbar-left" role="search">
@@ -86,14 +86,22 @@
               <div class="col-md-6 ngView">
                 <div ng-view=""></div>
               </div>
-              <div class="col-md-1"></div>
-            <div id='chatRoom'>
-              <p ng-repeat='msg in EC.currEvent[0].messages'>{{msg.text}} - {{msg.username}}({{msg.date | date: 'medium'}}) </p>
-            </div>
-            <div class="col-md-5" id = "map"></div>
+              <div class="col-md-6">
+                <div>
+                <div id='chatRoom'>
+                  <p ng-repeat='msg in EC.currEvent[0].messages'>{{msg.text}} - {{msg.username}}({{msg.date | date: 'medium'}}) </p>
+                </div>
+
+                <div id="inputBox">
+                  {{EC.errorChat}} <input id= "inputChat" type='text' class="form-control" ng-model='EC.sentMessage.text'><button class='btn btn-default sendMsg' ng-click ='EC.sendMessage()'>Send Message</button>
+                </div>
+                <div id = "map"></div>
+                </div>
             </div>
         </div> 
       </div>
     </div>
   </body>
+  <style type="text/css">
+  </style>
 </html>
