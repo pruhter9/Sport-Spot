@@ -2,6 +2,7 @@ SportSpot_app.controller('Users', function($scope, UsersFactory, $location) {
   var that = this
   that.currUser = {}
   that.loginError = ""
+  that.loggedIn = false;
 
   that.register = function() {
     UsersFactory.register(that.newUser, function(newRegUser) {
@@ -9,16 +10,22 @@ SportSpot_app.controller('Users', function($scope, UsersFactory, $location) {
   			that.loginError = "there already a user with that username"
   		} else {
   			that.currUser = newRegUser[0]
+        that.loggedIn = true;
   			that.newUser = {};
   			$location.path('/main')
   		}
     });
   };
+
+  that.getUserEvents=function(){
+    console.log("itworks")
+  }
   that.checkLogin=function(){
     console.log('here');
     UsersFactory.checkLogin(function(data){
       if(data){
         that.currUser=data;
+        that.loggedIn=true;
         $location.path('/main');
       };
     });
@@ -29,6 +36,7 @@ SportSpot_app.controller('Users', function($scope, UsersFactory, $location) {
   			that.loginError = "there is no User with that Username and Password Combination"
   		} else {
   			that.currUser = currUser[0]
+        that.loggedIn = true;
   			that.loginInfo = {}
   			$location.path('/main')
   		}

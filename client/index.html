@@ -3,15 +3,19 @@
     <title>Create. Gather. Play.</title>
     <script type="text/javascript" src="/socket.io/socket.io.js"></script>
     <script src='//maps.googleapis.com/maps/api/js?sensor=false&language=en'></script>
-    <script src='//code.jquery.com/jquery-2.1.4.min.js'></script>
-    <!-- Style -->
     <link rel="stylesheet" type="text/css" href="./styles/css/bootstrap.min.css">
+    <script src='./styles/js/jQuery.js'></script>
+    <!-- Style -->
+    <script type="text/javascript" src="./styles/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="./styles/css/override.css">
     <!-- javascript -->
 
     <script type="text/javascript" src="./styles/js/angular.min.js"></script>
     <script type="text/javascript" src="./styles/js/lodash.min.js"></script>
     <script type="text/javascript" src="./styles/js/angular-route.min.js"></script>
+    <script type="text/javascript" src="./styles/js/ui-bootstrap-0.13.4.min.js"></script>
+    <script type="text/javascript" src="./styles/js/custom.js">
+    </script>
       <!-- initialize the app with angular -->
   <script type="text/javascript" src="./app.js"></script>
   <script type="text/javascript" src="./javascripts/controllers/users.js"></script>
@@ -24,12 +28,70 @@
   <body>
     <div ng-controller="Users as UC">
         <div ng-controller="Events as EC">
+        <nav class="navbar navbar-default">
+          <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="#/about">SportSpot</a>
+            </div>
+
+         <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+<!--               <ul class="nav navbar-nav">
+                <li ><a href="">Link 1<span class="sr-only">(current)</span></a></li>
+                <li><a href="profile">Link 2</a></li>
+                <li class="dropdown">
+                  <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account <span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="#">Action</a></li>
+                    <li><a href="#">Another action</a></li>
+                    <li><a href="#">Something else here</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="#">Separated link</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="#">One more separated link</a></li>
+                  </ul>
+                </li>
+              </ul>  -->
+              <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown" ng-if="UC.loggedIn">
+                  <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account <span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="#/profile">Profile</a></li>
+                    <li><a href="" ng-click="UC.getUserEvents()">Events</a></li>
+                    <li><a href="#">Something else here</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="#">Separated link</a></li>
+                  </ul>
+                </li>
+                <form ng-if="UC.loggedIn==false"class="navbar-form navbar-left" role="search">
+                  <div class="form-group">
+                    <input type="text" class="form-control" ng-model="UC.loginInfo.userName" placeholder="username">
+                    <input type="password" class="form-control" ng-model="UC.loginInfo.password" placeholder="password">
+                  </div>
+                  <button type="submit" class="btn btn-default" ng-click="UC.login()">Log In</button>
+              </form>
+              </ul>
+            </div><!-- /.navbar-collapse -->
+            </div>
+          </nav>
           <div class="container">
-            <div ng-view=""></div>
+            <div class="row">
+              <div class="col-md-6 ngView">
+                <div ng-view=""></div>
+              </div>
+              <div class="col-md-1"></div>
             <div id='chatRoom'>
               <p ng-repeat='msg in EC.currEvent[0].messages'>{{msg.text}} - {{msg.username}}({{msg.date | date: 'medium'}}) </p>
             </div>
-            <div id = "map"></div>
+            <div class="col-md-5" id = "map"></div>
+            </div>
         </div> 
       </div>
     </div>

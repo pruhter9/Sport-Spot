@@ -1,4 +1,4 @@
-var SportSpot_app = angular.module('SportSpot_app', ['ngRoute']);
+var SportSpot_app = angular.module('SportSpot_app', ['ngRoute','ui.bootstrap']);
 
   SportSpot_app.config(function ($routeProvider){
     $routeProvider

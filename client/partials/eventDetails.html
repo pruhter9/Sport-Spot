@@ -1,3 +1,33 @@
+    <script type="text/javascript">
+    	console.log("hello")
+	    windowWidth = $(this).width();
+	    console.log(windowWidth)
+
+	    if (windowWidth < 977) {
+
+	        $("#chatBox").css("height", 250);
+
+	    } else if (windowWidth >= 977) {
+
+	        $("#nameHeader").css("height", 500);
+
+	    }
+    $(window).resize(function () {
+		console.log("hello")
+	    windowWidth = $(this).width();
+	    console.log(windowWidth)
+
+	    if (windowWidth < 977) {
+
+	        $("#chatBox").css("height", 250);
+
+	    } else if (windowWidth >= 977) {
+
+	        $("#nameHeader").css("height", 500);
+
+	    }
+	});
+	</script>
 <div ng-init='EC.resize()'>
 	<header>Created By: {{EC.currEvent[0]._user.firstName}} {{EC.currEvent[0]._user.lastName}}</header>
 	<header>Address: {{EC.currEvent[0].address}}</header>

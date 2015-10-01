@@ -4,11 +4,11 @@
 
 <form name="logForm" novalidate >
 
-  <p><input type = "text" name ="uName" placeholder ="User Name"
+  <p><input type = "text" name ="uName" placeholder ="User Name" class="form-control"
   ng-class = "{'has-error' : regForm.uName.$invalid && !regForm.uName.$pristine }"
   ng-model ="UC.loginInfo.userName" ng-minlength="2" ng-maxlength="20" required></p>
 
-  <p><input type = "password" name ="password" placeholder ="Password"
+  <p><input class="form-control" type = "password" name ="password" placeholder ="Password"
   ng-class = "{'has-error' : regForm.password.$invalid && !regForm.password.$pristine }" ng-model ="UC.loginInfo.password" ng-minlength="8" ng-maxlength="20" required></p>
 
   <p><a ng-click ='UC.login()' href= "" ng-disabled="$regForm.$invalid">Login</a></p>
@@ -19,26 +19,26 @@
 
 <form name="regForm" novalidate >
 
-  <p><input type = "text" name="fName" placeholder="First Name"
+  <p><input class="form-control" type = "text" name="fName" placeholder="First Name"
   ng-class="{'has-error' : regForm.fName.$invalid && !regForm.fName.$pristine }"
   ng-model="UC.newUser.firstName" ng-minlength="2" ng-maxlength="20" required></p>
 
-  <p><input type = "text" name ="lName" placeholder ="Last Name"
+  <p><input class="form-control" type = "text" name ="lName" placeholder ="Last Name"
   ng-class = "{'has-error' : regForm.lName.$invalid && !regForm.lName.$pristine }"
   ng-model ="UC.newUser.lastName" ng-minlength="2" ng-maxlength="20" required></p>
 
-  <p><input type = "text" name ="userName" placeholder ="User Name"
+  <p><input class="form-control" type = "text" name ="userName" placeholder ="User Name"
   ng-class = "{'has-error' : regForm.uName.$invalid && !regForm.uName.$pristine }"
   ng-model ="UC.newUser.userName" ng-minlength="2" ng-maxlength="20" required></p>
 
-  <p><input type = "password" name ="password" placeholder ="Password"
+  <p><input class="form-control" type = "password" name ="password" placeholder ="Password"
   ng-class = "{'has-error' : regForm.password.$invalid && !regForm.password.$pristine }" ng-model ="UC.newUser.password" ng-minlength="8" ng-maxlength="20" required></p>
 
-  <p><input type = "password" name ="cPassword" placeholder = "confirm password"
+  <p><input class="form-control" type = "password" name ="cPassword" placeholder = "confirm password"
   ng-class = "{'has-error' : regForm.cPassword.$invalid && !regForm.cPassword.$pristine }"
   ng-minlength="2" ng-maxlength="20" required></p>
 
-  <p><input type = "email" name ="email" placeholder ="email"
+  <p><input class="form-control" type = "email" name ="email" placeholder ="email"
   ng-class = "{'has-error' : regForm.email.$invalid && !regForm.email.$pristine }"
   ng-model ="UC.new_user.email"  ng-minlength="2" ng-maxlength="20" required></p>
 
